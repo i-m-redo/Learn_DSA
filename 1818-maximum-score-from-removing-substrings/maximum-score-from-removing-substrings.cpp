@@ -1,7 +1,7 @@
 //Stack and dynamic approach
 class Solution {
 public:
-    int maxgain(string&s, string rs, int point){
+    /*int maxgain(string&s, string rs, int point){
         stack<char> st;
         int totalpoint=0;
         for(auto ch:s){
@@ -21,6 +21,19 @@ public:
         }
         reverse(s.begin(),s.end());
         return totalpoint;
+    }*/
+    int maxgain(string&s, string rs, int point){
+    int totalpoint = 0, n= s.length(), writeindex = 0;
+    for(int readindex=0;readindex<n;readindex++){
+        s[writeindex] = s[readindex];
+        writeindex++;
+        if(writeindex>1 && s[writeindex-1] == rs[1] && s[writeindex-2]== rs[0]){
+            totalpoint+=point;
+            writeindex-=2;
+            }
+        }
+        s = s.substr(0,writeindex);
+        return totalpoint;
     }
 
     int maximumGain(string s, int x, int y) {
@@ -31,4 +44,4 @@ public:
         }
         return maxgain(s,s1,x)+ maxgain(s,s2,y);   
     }
-};
+}; 
